@@ -55,18 +55,25 @@ fetch('https://raw.githubusercontent.com/Elena-Anishch/ggr472-wk10-lab4/main/dat
                 data: pedcyc
             });
 
-            // Add a layer to the map to display collision points as blue circles.
-            map.addLayer({
-                'id': 'pedcyc',  // Layer ID
-                'type': 'circle',  // The layer type (circle for points)
-                'source': 'pedcyc',  // Data source for this layer
-                'paint': {
-                    'circle-radius': 2,  // Size of the circle.
-                    'circle-color': 'blue'  // Color of the circle.
-                },
-                'layout': {
-                    
-                }
+             // Add a layer to the map to display collision points as blue circles.
+    map.addLayer({
+        'id': 'pedcyc',  // Layer ID
+        'type': 'circle',  // The layer type (circle for points)
+        'source': 'pedcyc',  // Data source for this layer
+        'paint': {
+            // Use zoom as an expression to adjust circle size dynamically
+            'circle-radius': [
+                'interpolate', // This will interpolate the circle size
+                ['linear'],    // Linear interpolation
+                ['zoom'],      // Use the zoom level
+                10, 2,         // At zoom level 10, the radius is 2
+                12, 9       // At zoom level 13, the radius is 4
+            ],
+            'circle-color': 'blue'  // Color of the circle.
+        },
+        'layout': {
+            // Layout settings (empty in this case)
+        }
             });
 
 
